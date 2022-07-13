@@ -14,10 +14,10 @@
  * }
  */
 class Solution {
-    int max =0;
+    //int max =0;
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> res = new ArrayList<>();
-        rightSideViewRec(root, res, 1);
+        rightSideViewRec(root, res, 0);
         return res;
         
     }
@@ -25,9 +25,8 @@ class Solution {
     private void rightSideViewRec(TreeNode root, List<Integer> res, int level){
         if(root == null)
             return;
-        if(max<level){
+        if(res.size() == level){
             res.add(root.val);
-            max++;
         }
         rightSideViewRec(root.right, res, level+1);
         rightSideViewRec(root.left, res, level+1);
