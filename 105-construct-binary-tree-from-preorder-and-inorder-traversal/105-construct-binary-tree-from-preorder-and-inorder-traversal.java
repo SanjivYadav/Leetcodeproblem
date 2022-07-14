@@ -16,7 +16,11 @@
 
 class Solution {
     int preIndex =0;
+    Map<Integer, Integer> cache = new HashMap<>();
     public TreeNode buildTree(int[] preorder, int[] inorder) {
+        for(int i=0;i<inorder.length;i++){
+            cache.put(inorder[i],i);
+        }
         return buildTreeRec(preorder,inorder,0,inorder.length-1);
         
     }
@@ -27,7 +31,7 @@ class Solution {
         TreeNode root = new TreeNode(preOrder[preIndex++]);
         if(inStart == inEnd)
             return root;
-        int inIndex = search(inOrder,inStart,inEnd,root.val);
+        int inIndex = cache.get(root.val);//search(inOrder,inStart,inEnd,root.val);
         root.left = buildTreeRec(preOrder,inOrder,inStart,inIndex-1);
         root.right = buildTreeRec(preOrder,inOrder,inIndex+1,inEnd);
         return root;
